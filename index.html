@@ -261,7 +261,7 @@
                     chargeB = elementB.charge;
                     while (amountA * chargeA + amountB * chargeB != 0) if (amountA * chargeA + amountB * chargeB > 0) amountB++; else amountA++;
                     formula = elementA.symbol + amountA + elementB.symbol + amountB;
-                    formulaName = elementA.elementName + ((possibility == "ionic" || possibility == "polyatomic" || elementA.symbol == "Ag") && elementA.elementName != "NH4" ? " " : " (" + roman[chargeA - 1] + ") ") + (polyatomicIons.includes(elementB) ? elementB.elementName : elementB.anionName);
+                    formulaName = elementA.elementName + ((possibility == "ionic" || possibility == "polyatomic" || elementA.symbol == "Ag" || elementA.symbol = "(NH4)") ? " " : " (" + roman[chargeA - 1] + ") ") + (polyatomicIons.includes(elementB) ? elementB.elementName : elementB.anionName);
                 }
                 question = answerWithName ? simplifyFormula(formula) : formulaName;
                 
