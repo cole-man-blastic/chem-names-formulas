@@ -48,21 +48,6 @@
                 margin-right: auto;
             }
         </style>
-    </head>
-    <body style="background-color: black;">
-        <h1>Chemical Names and Formulas</h1>
-        <div id="setup">
-            <div><input type="checkbox" id="molecular" checked><h2>Molecular Compounds</h2></div>
-            <div><input type="checkbox" id="diatomic" checked><h2>Diatomic Molecules</h2></div>
-            <div><input type="checkbox" id="alkali" checked><h2>Ionic Compounds with Alkali/Alkali Earth Metals</h2></div>
-            <div><input type="checkbox" id="transition" checked><h2>Ionic Compounds with Transition Metals</h2></div>
-            <div><input type="checkbox" id="simple" checked><h2>Ionic Compounds Allow Simple Non-Metal Ions</h2></div>
-            <div><input type="checkbox" id="polyatomic" checked><h2>Ionic Compounds Allow Polyatomic Ions</h2></div>
-            <div><input type="checkbox" id="formulaName" checked><h2>Answer with Names</h2></div>
-            <div><input type="checkbox" id="formula" checked><h2>Answer with Formulas</h2></div>
-            <button class="center" onclick="start()">Start</button>
-        </div>
-
         <script>
             let correctAnswers = 0;
             let incorrectAnswers = 0;
@@ -297,5 +282,21 @@
                 questionDisplay.innerHTML = question;
             }
         </script>
+    </head>
+    <body style="background-color: black;">
+        <h1>Chemical Names and Formulas</h1>
+        <div id="setup">
+            <div><input type="checkbox" id="molecular" checked><h2>Molecular Compounds</h2></div>
+            <div><input type="checkbox" id="diatomic" checked><h2>Diatomic Molecules</h2></div>
+            <div><input type="checkbox" id="alkali" checked><h2>Ionic Compounds with Alkali/Alkali Earth Metals</h2></div>
+            <div><input type="checkbox" id="transition" checked><h2>Ionic Compounds with Transition Metals</h2></div>
+            <div><input type="checkbox" id="simple" checked><h2>Ionic Compounds Allow Simple Non-Metal Ions</h2></div>
+            <div><input type="checkbox" id="polyatomic" checked><h2>Ionic Compounds Allow Polyatomic Ions</h2></div>
+            <div><input type="checkbox" id="formulaName" checked><h2>Answer with Names</h2></div>
+            <div><input type="checkbox" id="formula" checked><h2>Answer with Formulas</h2></div>
+            <button class="center" onclick="start()">Start</button>
+        </div>
+
+        
     </body>
 </html>
