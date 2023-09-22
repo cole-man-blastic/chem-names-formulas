@@ -89,6 +89,8 @@
             });
             submitButton.addEventListener("click", click);
             previousADisplay.style.color = "Red";
+            correctAnswerDisplay.style.color = "Lime";
+            incorrectAnswerDisplay.style.color = "Red";
 
             let settings = {
                 molecular: false,
@@ -296,7 +298,7 @@
 
             function generalizeFormulaName(formulaName) {
                 let newFormulaName = "";
-                for (let i = 0; i < formulaName.length; i++) if (!(formulaName[i] == "(" || formulaName[i] == ")" || (formulaName[i] == " " && formulaName[i + 1] == " "))) newFormulaName += formulaName[i];
+                for (let i = 0; i < formulaName.length; i++) if (!(formulaName[i] == "(" || formulaName[i] == ")" || (formulaName[i] == " " && (i + 1 == formulaName.length || formulaName[i + 1] == " " || i == 0)))) newFormulaName += formulaName[i];
                 return newFormulaName.toLowerCase();
             }
 
