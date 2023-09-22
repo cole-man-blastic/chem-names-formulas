@@ -76,6 +76,7 @@
             let previousQDisplay = document.createElement("h3");
             let previousADisplay = document.createElement("h3");
             let previousRDisplay = document.createElement("h3");
+            let previousCDisplay = document.createElement("h3");
 
             answerDisplay.classList.add("center");
             submitButton.classList.add("center");
@@ -87,6 +88,7 @@
                 }
             });
             submitButton.addEventListener("click", click);
+            previousADisplay.style.color = "Red";
 
             let settings = {
                 molecular: false,
@@ -126,8 +128,9 @@
                     quiz.append(answerDisplay);
                     quiz.append(submitButton);
                     quiz.append(previousQDisplay);
-                    quiz.append(previousADisplay);
                     quiz.append(previousRDisplay);
+                    quiz.append(previousADisplay);
+                    quiz.append(previousCDisplay);
 
                     newQuestion();
                 }
@@ -193,11 +196,18 @@
                 if (questionNumber > 1) {
                     if ((answerWithName && generalizeFormulaName(answerDisplay.value) == generalizeFormulaName(formulaName)) || !answerWithName && simplifyFormula(answerDisplay.value) == simplifyFormula(formula)) {
                         correctAnswers++;
+                        previousCDisplay.innerHTML = "Correct";
+                        previousADisplay.innerHTML = "";
+                        previousRDisplay.style.color = "Lime";
+                        previousCDisplay.style.color = "Lime";
                     } else {
                         incorrectAnswers++;
+                        previousCDisplay.innerHTML = "Incorrect"
+                        previousADisplay.innerHTML = "Correct Answer: " + (answerWithName ? formulaName : simplifyFormula(formula));
+                        previousRDisplay.style.color = "Red";
+                        previousCDisplay.style.color = "Red";
                     }
                     previousQDisplay.innerHTML = "Previous: " + (answerWithName ? simplifyFormula(formula) : formulaName);
-                    previousADisplay.innerHTML = "Correct Answer: " + (answerWithName ? formulaName : simplifyFormula(formula));
                     previousRDisplay.innerHTML = "Your Answer: " + answerDisplay.value;
                     answerDisplay.value = "";
                 }
@@ -286,7 +296,7 @@
 
             function generalizeFormulaName(formulaName) {
                 let newFormulaName = "";
-                for (let i = 0; i < formulaName.length; i++) if (!(formulaName[i] == "(" || formulaName[i] == ")")) newFormulaName += formulaName[i];
+                for (let i = 0; i < formulaName.length; i++) if (!(formulaName[i] == "(" || formulaName[i] == ")" || (formulaName[i] == " " && formulaName[i + 1] == " "))) newFormulaName += formulaName[i];
                 return newFormulaName.toLowerCase();
             }
 
