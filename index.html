@@ -266,7 +266,7 @@
                             chargeA = elementA.charge;
                         } else { 
                             elementA = transitionMetals[Math.floor(Math.random() * 16)];
-                            chargeA = elementA.symbol == "Ag" ? 2 : Math.floor(Math.random() * 6) + 1;
+                            chargeA = elementA.symbol == "Ag" ? 1 : Math.floor(Math.random() * 6) + 1;
                         }
                     }
                     if (possibility == "ionic" || possibility == "transition") elementB = nonmetals[Math.floor(Math.random() * 10)]; else elementB = polyatomicIons[Math.floor(Math.random() * 28)];
