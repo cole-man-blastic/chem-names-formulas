@@ -73,6 +73,22 @@
             let incorrectAnswerDisplay = document.createElement("h3");
             let questionNumberDisplay = document.createElement("h1");
             let questionDisplay = document.createElement("h1");
+            let answerDisplay = document.createElement("input");
+            let submitButton = document.createElement("button");
+            let previousQDisplay = document.createElement("h3");
+            let previousADisplay = document.createElement("h3");
+            let previousRDisplay = document.createElement("h3");
+
+            answerDisplay.classList.add("center");
+            submitButton.classList.add("center");
+            submitButton.innerHTML = "Submit";
+            answerDisplay.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    submitButton.click();
+                }
+            });
+            submitButton.addEventListener("click", click);
 
             let settings = {
                 molecular: false,
@@ -85,13 +101,13 @@
                 formula: false
             }
 
-            let formula;
-            let formulaName;
+            let formula = "";
+            let formulaName = "";
             let answerWithName;
 
             function start() {
                 Object.keys(settings).forEach((key) => settings[key]=document.getElementById(key).checked);
-                if ((settings.molecular || settings.diatomic || ((settings.alkali || settings.transition) && (settings.simple || settings.polyatomic))) && (settings.name || settings.formula)) {
+                if ((settings.molecular || settings.diatomic || ((settings.alkali || settings.transition) && (settings.simple || settings.polyatomic))) && (settings.formulaName || settings.formula)) {
                     document.getElementById("setup").remove();
                     
                     if (!(settings.alkali || settings.transition)) {
@@ -107,6 +123,11 @@
                     document.body.append(incorrectAnswerDisplay);
                     document.body.append(questionNumberDisplay);
                     document.body.append(questionDisplay);
+                    document.body.append(answerDisplay);
+                    document.body.append(submitButton);
+                    document.body.append(previousQDisplay);
+                    document.body.append(previousADisplay);
+                    document.body.append(previousRDisplay);
 
                     newQuestion();
                 }
@@ -135,6 +156,13 @@
                 }
             }
 
+            class PolyatomicIon extends Element {
+                constructor(symbol, elementName, charge) {
+                    super("(" + symbol + ")", elementName);
+                    this.charge = charge;
+                }
+            }
+
             const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
             const roman = ["I", "II", "III", "IV", "V", "VI"]
 
@@ -142,16 +170,37 @@
 
             const alkaliMetals = [new Alkali("Li", "Lithium", 1), new Alkali("Na", "Sodium", 1), new Alkali("K", "Potassium", 1)];
             const alkaliEarthMetals = [new Alkali("Be", "Beryllium", 2), new Alkali("Mg", "Magnesium", 2), new Alkali("Ca", "Calcium", 2), new Alkali("Sr", "Strontium", 2), new Alkali("Ba", "Barium", 2), new Alkali("Ra", "Radium", 2)];
-            const transitionMetals = [new Element("Sc", "Scandium"), new Element("Ti", "Titanium"), new Element("V", "Vanadium"), new Element("Cr", "Chromium"), new Element("Mg", "Manganese"), new Element("Fe", "Iron"), new Element("Co", "Cobalt"), new Element("Ni", "Nickel"), new Element("Cu", "Copper"), new Element("Pt", "Platinum"), new Element("Au", "Gold"), new Element("Hg", "Mercury"), new Element("Al", "Aluminium"), new Element("Sn", "Tin"), new Element("Pb", "Lead"), new Element("Ag", "Silver")];
+            const transitionMetals = [new Element("Sc", "Scandium"), new Element("Ti", "Titanium"), new Element("V", "Vanadium"), new Element("Cr", "Chromium"), new Element("Mg", "Manganese"), new Element("Fe", "Iron"), new Element("Co", "Cobalt"), new Element("Ni", "Nickel"), 
+            new Element("Cu", "Copper"), new Element("Pt", "Platinum"), new Element("Au", "Gold"), new Element("Hg", "Mercury"), new Element("Al", "Aluminium"), new Element("Sn", "Tin"), new Element("Pb", "Lead"), new Element("Ag", "Silver")];
             const halogens = [new NonMetal("I", "Iodine", "Iodide", normalPrefixes, -1), new NonMetal("Br", "Bromine", "Bromide", normalPrefixes, -1), new NonMetal("Cl", "Chlorine", "Chloride", normalPrefixes, -1), new NonMetal("F", "Fluorine", "Fluoride", normalPrefixes, -1)];
-            const reactiveNonmetals = [new NonMetal("C", "Carbon", "Carbide", normalPrefixes, -4), new NonMetal("P", "Phosphorus", "Phosphide", normalPrefixes, -3), new NonMetal("N", "Nitrogen", "Nitride", normalPrefixes, -3), new NonMetal("H", "Hydrogen", "Hydride", normalPrefixes, 1), new NonMetal("S", "Sulfur", "Sulfide", normalPrefixes, -2), new NonMetal("O", "Oxygen", "Oxide", ["Mon", "Di", "Tri", "Tetr", "Pent", "Hex", "Hept", "Oct", "Non", "Dec"], -2)];
-            const polyatomicIons = [];
+            const reactiveNonmetals = [new NonMetal("C", "Carbon", "Carbide", normalPrefixes, -4), new NonMetal("P", "Phosphorus", "Phosphide", normalPrefixes, -3), new NonMetal("N", "Nitrogen", "Nitride", normalPrefixes, -3), 
+            new NonMetal("H", "Hydrogen", "Hydride", normalPrefixes, -1), new NonMetal("S", "Sulfur", "Sulfide", normalPrefixes, -2), new NonMetal("O", "Oxygen", "Oxide", ["Mon", "Di", "Tri", "Tetr", "Pent", "Hex", "Hept", "Oct", "Non", "Dec"], -2)];
+            const polyatomicIons = [new PolyatomicIon("NO2", "Nitrite", -1), new PolyatomicIon("NO3", "Nitrate", -1), new PolyatomicIon("SO3", "Sulfite", -2), new PolyatomicIon("SO4", "Sulfate", -2), new PolyatomicIon("HSO4", "Hydrogen Sulfate", -1),
+            new PolyatomicIon("S2O3", "Thiosulfate", -2), new PolyatomicIon("C2O4", "Oxalate", -2), new PolyatomicIon("OH", "Hydroxide", -1), new PolyatomicIon("PO3", "Phosphite", -3), new PolyatomicIon("PO4", "Phosphate", -3),
+            new PolyatomicIon("HPO4", "Hydrogen Phosphate", -2), new PolyatomicIon("H2PO4", "Dihydrogen Phosphate", -1), new PolyatomicIon("ClO4", "Perchlorate", -1), new PolyatomicIon("ClO3", "Chlorate", -1), new PolyatomicIon("ClO2", "Chlorite", -1),
+            new PolyatomicIon("ClO", "Hypochlorite", -1), new PolyatomicIon("BrO3", "Bromate", -1), new PolyatomicIon("IO3", "Iodate", -1), new PolyatomicIon("CO3", "Carbonate", -2), new PolyatomicIon("HCO3", "Hydrogen Carbonate", -1), new PolyatomicIon("CrO4", "Chromate", -2),
+            new PolyatomicIon("Cr2O7", "Dichromate", -2), new PolyatomicIon("MgO4", "Permanganate", -1), new PolyatomicIon("O2", "Peroxide", -2), new PolyatomicIon("CN", "Cyanide", -1), new PolyatomicIon("OCN", "Cyanate", -1), new PolyatomicIon("SCN", "Thiocyanate", -1)];
 
             const nonmetals = reactiveNonmetals.concat(halogens);
             const diatomics = [reactiveNonmetals[2], reactiveNonmetals[3], reactiveNonmetals[5], ...halogens];
 
+            function click() {
+                if (answerDisplay.value.length > 0) newQuestion();
+            }
+
             function newQuestion() {
                 questionNumber++;
+                if (questionNumber > 1) {
+                    if ((answerWithName && generalizeFormulaName(answerDisplay.value) == generalizeFormulaName(formulaName)) || !answerWithName && simplifyFormula(answerDisplay.value) == simplifyFormula(formula)) {
+                        correctAnswers++;
+                    } else {
+                        incorrectAnswers++;
+                    }
+                    previousQDisplay.innerHTML = "Previous: " + (answerWithName ? simplifyFormula(formula) : formulaName);
+                    previousADisplay.innerHTML = "Correct Answer: " + (answerWithName ? formulaName : simplifyFormula(formula));
+                    previousRDisplay.innerHTML = "Your Answer: " + answerDisplay.value;
+                    answerDisplay.value = "";
+                }
 
                 let possibilities = []
 
@@ -166,28 +215,26 @@
                     if (settings.polyatomic) possibilities.push("extreme")
                 }
 
-                let possibility = "transition";//possibilities[Math.floor(Math.random() * possibilities.length)]
+                let possibility = possibilities[Math.floor(Math.random() * possibilities.length)]
 
-                if (!settings.formula) answerWithName = false; else if (!settings.formulaName) answerWithName = true; else Math.random() < 0.5;
+                if (!settings.formula) answerWithName = false; else if (!settings.formulaName) answerWithName = true; else answerWithName = Math.random() < 0.5; 
 
                 if (possibility == "molecular") {
-                    let remaining = nonmetals;
                     let id = Math.floor(Math.random() * 10);
                     let otherId = Math.floor(Math.random() * 9);
+                    if (otherId >= id) otherId++;
                     let elementA, elementB, amountA, amountB;
                     if (id <= otherId) {
-                        elementA = remaining[id];
-                        remaining.splice(nonmetals.indexOf(elementA), 1);
-                        elementB = remaining[otherId];
+                        elementA = nonmetals[id];
+                        elementB = nonmetals[otherId];
                     } else {
-                        elementB = remaining[id];
-                        remaining.splice(nonmetals.indexOf(elementA), 1);
-                        elementA = remaining[otherId];
+                        elementB = nonmetals[id];
+                        elementA = nonmetals[otherId];
                     }
 
                     amountA = Math.floor(Math.random() * 10) + 1;
                     amountB = Math.floor(Math.random() * 10) + 1;
-
+                    
                     formula = elementA.symbol + amountA + elementB.symbol + amountB;
                     formulaName = (amountA == 1 ? elementA.elementName : elementA.prefixes[amountA - 1] + elementA.elementName.toLowerCase()) + " " + elementB.prefixes[amountB - 1] + elementB.anionName.toLowerCase();
                      
@@ -199,28 +246,25 @@
                 } else {
                     let elementA, elementB, amountA = 1, amountB = 1, chargeA, chargeB;
                     if (settings.polyatomic && Math.random() < 0.05) {
-                        elementA = new Alkali("(NH4)", "Ammonium", 1);
+                        elementA = new PolyatomicIon("NH4", "Ammonium", 1);
                         chargeA = 1;
                     } else {
                         if (possibility == "ionic" || possibility == "polyatomic") {
                             elementA = alkaliMetals.concat(alkaliEarthMetals)[Math.floor(Math.random() * 9)];
                             chargeA = elementA.charge;
-                        } else {
+                        } else { 
                             elementA = transitionMetals[Math.floor(Math.random() * 16)];
-                            chargeA = elementA.symbol == "Ag" ? 2 : Math.floor(Math.random() * 5) + 1;
+                            chargeA = elementA.symbol == "Ag" ? 2 : Math.floor(Math.random() * 6) + 1;
                         }
                     }
-                    if (possibility == "ionic" || possibility == "transition") elementB = nonmetals[Math.floor(Math.random() * 10)]; else elementB = polyatomicIons[Math.floor(Math.random() * 1)];
+                    if (possibility == "ionic" || possibility == "transition") elementB = nonmetals[Math.floor(Math.random() * 10)]; else elementB = polyatomicIons[Math.floor(Math.random() * 28)];
                     chargeB = elementB.charge;
-                    while (amountA * chargeA + amountB * chargeB != 0) {
-                        if (amountA * chargeA + amountB * chargeB > 0) amountB++; else amountA++;
-                        alert();
-                    } 
+                    while (amountA * chargeA + amountB * chargeB != 0) if (amountA * chargeA + amountB * chargeB > 0) amountB++; else amountA++;
                     formula = elementA.symbol + amountA + elementB.symbol + amountB;
-                    formulaName = elementA.elementName + (possibility == "ionic" || possibility == "polyatomic" ? " " : " (" + roman[chargeA - 1] + ") ") + (polyatomicIons.includes(elementB) ? elementB.elementName : elementB.anionName);
-                } 
-
-                question = simplifyFormula(formula) + " = " + formulaName;
+                    formulaName = elementA.elementName + ((possibility == "ionic" || possibility == "polyatomic") && elementA.elementName != "NH4" ? " " : " (" + roman[chargeA - 1] + ") ") + (polyatomicIons.includes(elementB) ? elementB.elementName : elementB.anionName);
+                }
+                question = answerWithName ? simplifyFormula(formula) : formulaName;
+                
                 display();
             }
 
