@@ -1,5 +1,5 @@
-# chem-names-formulas
+# Chemical Names and Formulas
 
 To help my goofy classmates study for AP Chem.
 
-[Link](https://cole-man-blastic.github.io/chem-names-formulas/)
+[Link to Study Site](https://cole-man-blastic.github.io/chem-names-formulas/)
