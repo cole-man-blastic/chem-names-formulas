@@ -10,6 +10,7 @@
                 text-align: center;
                 font-weight: bolder;
                 margin: 5px;
+                text-shadow: 0.125em 0.125em 0.125em black;
             }
             h2 {
                 font-size: 1em;
@@ -17,7 +18,8 @@
                 color:white;
                 font-weight: bold;
                 display: inline-block;
-                margin: 5px;
+                margin: 5px;                
+                text-shadow: 0.125em 0.125em 0.125em black;
             }
             h3 {
                 font-size: 1em;
@@ -26,6 +28,7 @@
                 text-align: center;
                 font-weight: bold;
                 margin: 5px;
+                text-shadow: 0.125em 0.125em 0.125em black;
             }
             button {
                 font-size: 2em;
@@ -40,11 +43,13 @@
                 transition-duration:  0.25s;
                 margin: 20px;
                 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                box-shadow: 9px 9px 10px black;
+                text-shadow: 0.125em 0.125em 0.125em black;
             }
             button:hover {
                 color: rgb(128, 29, 128);
-                background-color: rgb(64, 29, 64);
-                font-size: 2.5em;
+                background-color: rgb(7, 2, 29);
+                box-shadow: 3px 3px 10px black;
             }
             .check {
                 margin-left: calc(50% - 4.5em);
@@ -62,7 +67,7 @@
             }
             #title {
                 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                color:rgb(55, 166, 101);
+                color:rgb(128, 29, 128);
                 font-size: 2em;
             }
             #qn {
@@ -80,6 +85,7 @@
                 border-width: 5px;
                 text-align: center;
                 border-color: white;
+                text-shadow: 0.125em 0.125em 0.125em black;
             }
         </style>
         <script>
@@ -109,9 +115,9 @@
                 }
             });
             submitButton.addEventListener("click", click);
-            previousADisplay.style.color = "Red";
-            correctAnswerDisplay.style.color = "Lime";
-            incorrectAnswerDisplay.style.color = "Red";
+            previousADisplay.style.color = "rgb(162, 8, 8)";
+            correctAnswerDisplay.style.color = "rgb(8, 162, 8)";
+            incorrectAnswerDisplay.style.color = "rgb(162, 8, 8)";
             questionNumberDisplay.id = "qn";
 
             let settings = {
@@ -222,14 +228,14 @@
                         correctAnswers++;
                         previousCDisplay.innerHTML = "Correct";
                         previousADisplay.innerHTML = "";
-                        previousRDisplay.style.color = "Lime";
-                        previousCDisplay.style.color = "Lime";
+                        previousRDisplay.style.color = "rgb(8, 162, 8)";
+                        previousCDisplay.style.color = "rgb(8, 162, 8)";
                     } else {
                         incorrectAnswers++;
                         previousCDisplay.innerHTML = "Incorrect"
                         previousADisplay.innerHTML = "Correct Answer: " + (answerWithName ? formulaName : simplifyFormula(formula));
-                        previousRDisplay.style.color = "Red";
-                        previousCDisplay.style.color = "Red";
+                        previousRDisplay.style.color = "rgb(162, 8, 8)";
+                        previousCDisplay.style.color = "rgb(162, 8, 8)";
                     }
                     previousQDisplay.innerHTML = "Previous: " + (answerWithName ? simplifyFormula(formula) : formulaName);
                     previousRDisplay.innerHTML = "Your Answer: " + answerDisplay.value;
