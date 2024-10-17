@@ -317,12 +317,13 @@
                     if (singularsFormula[i] == "(") for (let j = i; j < singularsFormula.length; j++) if (singularsFormula[j] == ")" && !numbers.includes(singularsFormula[j + 1])) {
                         remember[i] = false;
                         remember[j] = false;
+                        break;
                     }
                     if (singularsFormula[i] == " ") remember[i] = false;
                     if (remember[i]) newFormula += singularsFormula[i];
                 }
                 
-                return newFormula + "[" + singularsFormula + "]";
+                return newFormula;
             }
 
             function generalizeFormulaName(formulaName) {
