@@ -321,9 +321,8 @@
                     if (singularsFormula[i] == " ") remember[i] = false;
                     if (remember[i]) newFormula += singularsFormula[i];
                 }
-                if (newFormula.substring(0, 4).toUpperCase() == "NH4)") newFormula = "(" += newFormula;
                 
-                return newFormula;
+                return newFormula + "[" + singularsFormula + "]";
             }
 
             function generalizeFormulaName(formulaName) {
