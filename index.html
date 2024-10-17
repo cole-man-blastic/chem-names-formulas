@@ -321,6 +321,8 @@
                     if (singularsFormula[i] == " ") remember[i] = false;
                     if (remember[i]) newFormula += singularsFormula[i];
                 }
+                if (newFormula.subString(0, 4).toUpperCase() == "NH4)") newFormula = "(" += newFormula;
+                
                 return newFormula;
             }
 
