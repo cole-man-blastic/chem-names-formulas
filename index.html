@@ -314,11 +314,10 @@
                 let remember = [];
                 for (let i = 0; i < singularsFormula.length; i++) remember.push(true);
                 for (let i = 0; i < singularsFormula.length; i++) {
-                    if (singularsFormula[i] == "(") for (let j = i; j < singularsFormula.length; j++) if (singularsFormula[j] == ")" && !numbers.includes(singularsFormula[j + 1])) {
+                    if (singularsFormula[i] == "(") for (let j = i; j < singularsFormula.length; j++) if (singularsFormula[j] == ")") if (!numbers.includes(singularsFormula[j + 1])) {
                         remember[i] = false;
                         remember[j] = false;
-                        break;
-                    }
+                    } else break;
                     if (singularsFormula[i] == " ") remember[i] = false;
                     if (remember[i]) newFormula += singularsFormula[i];
                 }
